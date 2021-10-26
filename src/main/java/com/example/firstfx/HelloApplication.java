@@ -1,8 +1,7 @@
 package com.example.firstfx;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,8 +30,7 @@ public class HelloApplication extends Application {
     Button clear;
     Button equal;
 
-    Boolean onfirst;
-    Boolean afterEquals;
+    Boolean onFirst;
     String firstNum;
     String secNum;
     String labelText;
@@ -49,13 +47,13 @@ public class HelloApplication extends Application {
         stage.setTitle("Calculator by Ricardo B");
         topLabel = new Label(" General Purpose Calculator");
         topLabel.setFont(new Font("Cambria", 20));
+
+
         createButtons();
-        onfirst = true;
-        afterEquals = false;
+        onFirst = true;
         labelText = "";
         firstNum = "";
         secNum = "";
-
 
         // Create: root and rowNodes
         VBox root = new VBox();
@@ -65,7 +63,7 @@ public class HelloApplication extends Application {
         HBox fthRow= new HBox(clear, zero, equal, div);
 
         // Create Scene and set Scene
-        Scene scene = new Scene(root, 240, 267);
+        Scene scene = new Scene(root, 240, 265);
         stage.setScene(scene);
 
         setButtonBehavior();
@@ -77,51 +75,55 @@ public class HelloApplication extends Application {
     public void handleButton(Button button){
         String id = button.getId();
         button.setOnAction(event -> {
-            if(id.equals("clear") || id.equals("=")){
-                if(id.equals("=")){
-                    labelText += " = " + executeOperation();
-                    afterEquals = true;
-                }else{
-                    labelText = "";
-                }
+            if(id.equals("clear")){
+                labelText = "";
+                firstNum = "";
+                secNum = "";
+                onFirst = true;
                 operation = "";
-                clearOperands();
-                onfirst = true;
+                topLabel.setText(labelText);
+            }else if(id.equals("=")){
+                String answer = String.valueOf(executeOperation());
+                labelText = answer;
+                firstNum = answer;
+                secNum = "";
+                onFirst = false;
+                topLabel.setText(labelText);
+                operation = "";
             }else if(id.equals("+")){
                 //// logic for operands
                 labelText += " + ";
                 operation = "+";
-                onfirst = false;
+                onFirst = false;
+                topLabel.setText(labelText);
             }else if(id.equals("-")){
                 //// logic for operands
                 labelText += " - ";
                 operation = "-";
-                onfirst = false;
-            }else if(id.equals("*")){
+                onFirst = false;
+                topLabel.setText(labelText);
+            }else if(id.equals("x")){
                 //// logic for operands
-                labelText += " * ";
-                operation = "*";
-                onfirst = false;
+                labelText += " x ";
+                operation = "x";
+                onFirst = false;
+                topLabel.setText(labelText);
             }else if(id.equals("/")){
                 //// logic for operands
                 labelText += " / ";
                 operation = "/";
-                onfirst = false;
+                onFirst = false;
+                topLabel.setText(labelText);
             }else{
-                if(afterEquals){
-                    labelText = "";
-                    topLabel.setText(labelText);
-                    afterEquals = false;
-                }
                 // For all numerical values
-                if(onfirst){
+                if(onFirst){
                     firstNum += id;
                 }else {
                     secNum += id;
                 }
                 labelText += id;
+                topLabel.setText(labelText);
             }
-            topLabel.setText(labelText);
         });
     }
 
@@ -142,11 +144,6 @@ public class HelloApplication extends Application {
         handleButton(div);
         handleButton(clear);
         handleButton(equal);
-    }
-
-    public void clearOperands(){
-        this.firstNum = "";
-        this.secNum = "";
     }
 
     public void setButtonConstraints(Button button){
@@ -205,9 +202,9 @@ public class HelloApplication extends Application {
         setButtonConstraints(sub);
         sub.setId("-");
 
-        this.mult = new Button("*");
+        this.mult = new Button("x");
         setButtonConstraints(mult);
-        mult.setId("*");
+        mult.setId("x");
 
         this.div = new Button("/");
         setButtonConstraints(div);
@@ -223,14 +220,15 @@ public class HelloApplication extends Application {
     }
 
     public float executeOperation(){
+
         if(operation.equals("+")){
-            return Integer.parseInt(this.firstNum) + Integer.parseInt(this.secNum);
+            return Float.parseFloat(this.firstNum) + Float.parseFloat(this.secNum);
         }else if(operation.equals("-")){
-            return Integer.parseInt(this.firstNum) - Integer.parseInt(this.secNum);
+            return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
         }else if(operation.equals("/")){
-            return (float)Integer.parseInt(this.firstNum) / Integer.parseInt(this.secNum);
+            return Float.parseFloat(this.firstNum) / Float.parseFloat(this.secNum);
         }else{
-            return Integer.parseInt(this.firstNum) * Integer.parseInt(this.secNum);
+            return Float.parseFloat(this.firstNum) * Float.parseFloat(this.secNum);
         }
     }
 }
