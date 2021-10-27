@@ -81,39 +81,27 @@ public class HelloApplication extends Application {
                 secNum = "";
                 onFirst = true;
                 operation = "";
-                topLabel.setText(labelText);
             }else if(id.equals("=")){
                 String answer = String.valueOf(executeOperation());
                 labelText = answer;
                 firstNum = answer;
                 secNum = "";
                 onFirst = false;
-                topLabel.setText(labelText);
                 operation = "";
             }else if(id.equals("+")){
                 //// logic for operands
-                labelText += " + ";
-                operation = "+";
-                onFirst = false;
-                topLabel.setText(labelText);
+                handleOperatorLogic("+");
             }else if(id.equals("-")){
                 //// logic for operands
-                labelText += " - ";
-                operation = "-";
-                onFirst = false;
-                topLabel.setText(labelText);
+                handleOperatorLogic("-");
+
             }else if(id.equals("x")){
                 //// logic for operands
-                labelText += " x ";
-                operation = "x";
-                onFirst = false;
-                topLabel.setText(labelText);
+                handleOperatorLogic("x");
+
             }else if(id.equals("/")){
                 //// logic for operands
-                labelText += " / ";
-                operation = "/";
-                onFirst = false;
-                topLabel.setText(labelText);
+                handleOperatorLogic("/");
             }else{
                 // For all numerical values
                 if(onFirst){
@@ -122,9 +110,15 @@ public class HelloApplication extends Application {
                     secNum += id;
                 }
                 labelText += id;
-                topLabel.setText(labelText);
             }
+            topLabel.setText(labelText);
         });
+    }
+
+    public void handleOperatorLogic(String op){
+        labelText += (" " + op + " ");
+        operation = op;
+        onFirst = false;
     }
 
     public void setButtonBehavior(){
