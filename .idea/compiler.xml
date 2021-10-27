@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="firstFX" />
+        <module name="firstfx" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="firstFX" target="17" />
+      <module name="firstfx" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
