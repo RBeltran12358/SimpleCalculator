@@ -94,11 +94,9 @@ public class HelloApplication extends Application {
             }else if(id.equals("-")){
                 //// logic for operands
                 handleOperatorLogic("-");
-
             }else if(id.equals("x")){
                 //// logic for operands
                 handleOperatorLogic("x");
-
             }else if(id.equals("/")){
                 //// logic for operands
                 handleOperatorLogic("/");
