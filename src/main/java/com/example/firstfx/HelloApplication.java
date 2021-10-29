@@ -29,6 +29,7 @@ public class HelloApplication extends Application {
     Button mult;
     Button clear;
     Button equal;
+    Button log10;
 
     Boolean onFirst;
     String firstNum;
@@ -48,7 +49,6 @@ public class HelloApplication extends Application {
         topLabel = new Label(" General Purpose Calculator");
         topLabel.setFont(new Font("Cambria", 20));
 
-
         createButtons();
         onFirst = true;
         labelText = "";
@@ -61,14 +61,16 @@ public class HelloApplication extends Application {
         HBox sRow= new HBox(four, five, six, sub);
         HBox tRow= new HBox(seven, eight, nine, mult);
         HBox fthRow= new HBox(clear, zero, equal, div);
+        HBox sthRow= new HBox(log10);
+
 
         // Create Scene and set Scene
-        Scene scene = new Scene(root, 240, 265);
+        Scene scene = new Scene(root, 350, 350);
         stage.setScene(scene);
 
         setButtonBehavior();
 
-        root.getChildren().addAll(topLabel, fRow, sRow, tRow, fthRow);
+        root.getChildren().addAll(topLabel, fRow, sRow, tRow, fthRow, sthRow);
         stage.show();
     }
 
@@ -80,6 +82,15 @@ public class HelloApplication extends Application {
                 firstNum = "";
                 secNum = "";
                 onFirst = true;
+                operation = "";
+            }else if(id.equals("log10")){
+                //// logic for log10
+                operation = "log10";
+                String answer = String.valueOf(executeOperation());
+                labelText = answer;
+                firstNum = answer;
+                secNum = "";
+                onFirst = false;
                 operation = "";
             }else if(id.equals("=")){
                 String answer = String.valueOf(executeOperation());
@@ -136,6 +147,7 @@ public class HelloApplication extends Application {
         handleButton(div);
         handleButton(clear);
         handleButton(equal);
+        handleButton(log10);
     }
 
     public void setButtonConstraints(Button button){
@@ -209,6 +221,10 @@ public class HelloApplication extends Application {
         this.equal = new Button("=");
         setButtonConstraints(equal);
         equal.setId("=");
+
+        this.log10 = new Button("log10");
+        setButtonConstraints(log10);
+        log10.setId("log10");
     }
 
     public float executeOperation(){
@@ -219,6 +235,21 @@ public class HelloApplication extends Application {
             return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
         }else if(operation.equals("/")){
             return Float.parseFloat(this.firstNum) / Float.parseFloat(this.secNum);
+        }else if(operation.equals("log10")){
+
+
+
+//            return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
+            if(this.firstNum.equals("")){
+                return Float.MAX_VALUE;
+            }
+            double ret = Math.log10(Double.parseDouble(this.firstNum));
+            return (float)ret;
+
+
+
+
+
         }else{
             return Float.parseFloat(this.firstNum) * Float.parseFloat(this.secNum);
         }
