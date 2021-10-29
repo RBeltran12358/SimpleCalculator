@@ -36,6 +36,7 @@ public class HelloApplication extends Application {
     String secNum;
     String labelText;
     String operation;
+    static final String log10Id = "log10";
 
 
     public static void main(String[] args) {
@@ -83,9 +84,9 @@ public class HelloApplication extends Application {
                 secNum = "";
                 onFirst = true;
                 operation = "";
-            }else if(id.equals("log10")){
+            }else if(id.equals(log10Id)){
                 //// logic for log10
-                operation = "log10";
+                operation = log10Id;
                 String answer = String.valueOf(executeOperation());
                 labelText = answer;
                 firstNum = answer;
@@ -222,9 +223,9 @@ public class HelloApplication extends Application {
         setButtonConstraints(equal);
         equal.setId("=");
 
-        this.log10 = new Button("log10");
+        this.log10 = new Button(log10Id);
         setButtonConstraints(log10);
-        log10.setId("log10");
+        log10.setId(log10Id);
     }
 
     public float executeOperation(){
@@ -235,21 +236,13 @@ public class HelloApplication extends Application {
             return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
         }else if(operation.equals("/")){
             return Float.parseFloat(this.firstNum) / Float.parseFloat(this.secNum);
-        }else if(operation.equals("log10")){
-
-
-
+        }else if(operation.equals(log10Id)){
 //            return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
             if(this.firstNum.equals("")){
                 return Float.MAX_VALUE;
             }
             double ret = Math.log10(Double.parseDouble(this.firstNum));
             return (float)ret;
-
-
-
-
-
         }else{
             return Float.parseFloat(this.firstNum) * Float.parseFloat(this.secNum);
         }
