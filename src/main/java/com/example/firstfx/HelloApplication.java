@@ -36,7 +36,6 @@ public class HelloApplication extends Application {
     String secNum;
     String labelText;
     String operation;
-//    static final String log10Id = "log10";
 
 
     public static void main(String[] args) {
@@ -237,7 +236,6 @@ public class HelloApplication extends Application {
         }else if(operation.equals("/")){
             return Float.parseFloat(this.firstNum) / Float.parseFloat(this.secNum);
         }else if(operation.equals("l")){
-//            return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
             if(this.firstNum.equals("")){
                 return Float.MAX_VALUE;
             }
