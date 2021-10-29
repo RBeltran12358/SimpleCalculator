@@ -222,7 +222,7 @@ public class HelloApplication extends Application {
         setButtonConstraints(equal);
         equal.setId("=");
 
-        this.log10 = new Button("l");
+        this.log10 = new Button("log10");
         setButtonConstraints(log10);
         log10.setId("l");
     }
