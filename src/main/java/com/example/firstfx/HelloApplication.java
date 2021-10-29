@@ -36,7 +36,7 @@ public class HelloApplication extends Application {
     String secNum;
     String labelText;
     String operation;
-    static final String log10Id = "log10";
+//    static final String log10Id = "log10";
 
 
     public static void main(String[] args) {
@@ -84,9 +84,9 @@ public class HelloApplication extends Application {
                 secNum = "";
                 onFirst = true;
                 operation = "";
-            }else if(id.equals(log10Id)){
+            }else if(id.equals("l")){
                 //// logic for log10
-                operation = log10Id;
+                operation = "l";
                 String answer = String.valueOf(executeOperation());
                 labelText = answer;
                 firstNum = answer;
@@ -223,9 +223,9 @@ public class HelloApplication extends Application {
         setButtonConstraints(equal);
         equal.setId("=");
 
-        this.log10 = new Button(log10Id);
+        this.log10 = new Button("l");
         setButtonConstraints(log10);
-        log10.setId(log10Id);
+        log10.setId("l");
     }
 
     public float executeOperation(){
@@ -236,7 +236,7 @@ public class HelloApplication extends Application {
             return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
         }else if(operation.equals("/")){
             return Float.parseFloat(this.firstNum) / Float.parseFloat(this.secNum);
-        }else if(operation.equals(log10Id)){
+        }else if(operation.equals("l")){
 //            return Float.parseFloat(this.firstNum) - Float.parseFloat(this.secNum);
             if(this.firstNum.equals("")){
                 return Float.MAX_VALUE;
